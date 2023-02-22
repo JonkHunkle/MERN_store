@@ -24,7 +24,6 @@
     "graphql-tag": "^2.12.6",
     "graphql-ws": "^5.11.3",
     "mongoose": "^6.9.1",
-    "parser": "^0.1.4",
     "ws": "^8.12.1"
   },
   "devDependencies": {
