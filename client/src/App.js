@@ -1,5 +1,5 @@
 import { ApolloClient, InMemoryCache, ApolloProvider,split, HttpLink } from '@apollo/client';
-import React, { useEffect } from 'react';
+import React from 'react';
 import ProductComponent from './components/ProductComponent';
 // Importing our theme provider which will make our global state available to child components
 import StoreProvider from './utils/StoreContext';
@@ -38,9 +38,7 @@ const client = new ApolloClient({
 
 
 export default function App() {
-  useEffect(() => {
-    document.title = "Anne's Antiques";
-  }, []);
+  
 
   return (
     <ApolloProvider client={client}> 

@@ -78,7 +78,7 @@ export default function ProductComponent() {
             <input
               className='mx-2'
               name='quantity'
-              value={product.quantity}
+              value={product?.quantity??''}
               onChange={(e) => handleChange(e)}
               placeholder="New Product quantity..."
               type="number"
