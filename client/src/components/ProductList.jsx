@@ -1,25 +1,23 @@
 import React, {useState} from 'react'
 import { useMutation } from '@apollo/client';
 import { QUERY_PRODUCTS } from '../utils/queries';
-import { EDIT_PRODUCT } from './../utils/mutations';
-import { DELETE_PRODUCT } from './../utils/mutations';
+import { EDIT_PRODUCT, DELETE_PRODUCT } from './../utils/mutations';
 
 
 export default function ProductList({products}) {
   const [selectedProduct, setSelectedProduct] = useState({})
-  const [editProduct, { error ,loading}]= useMutation(EDIT_PRODUCT,{
+  const [editProduct, { error:editError }]= useMutation(EDIT_PRODUCT,{
     refetchQueries: [
       {query: QUERY_PRODUCTS}, 
       'getProducts' 
     ],
   })
-  const [deleteProduct, { error: deleteError ,loading:deleteLoading}]= useMutation(DELETE_PRODUCT,{
+  const [deleteProduct, { error: deleteError }]= useMutation(DELETE_PRODUCT,{
     refetchQueries: [
       {query: QUERY_PRODUCTS}, 
       'getProducts' 
     ],
   })
-  
 
 const handleEditProduct = (e) =>{
 e.preventDefault()
@@ -60,7 +58,7 @@ const handleSubmit = (e)=>{
       }
   });
 } catch (err) {
-console.error('err: ',err);
+console.error('err: ',editError);
 }
   setSelectedProduct({})
 }
@@ -70,7 +68,7 @@ console.error('err: ',err);
 
   return (
     <section className="product-list p-2" style={{display:'flex', flexDirection:'column', alignItems:'center' }}>
-        {products?.length&&products?.map((product) => (
+        {products?.length>0&&products?.map((product) => (
           <div key={product._id} id={product._id} style={{textAlign:'center'}} className="card bg-light col-md-6 mb-3">
             {product._id===selectedProduct._id? (<> 
             <h4 className="card-header bg-primary text-light p-2 m-0">

@@ -11,22 +11,21 @@ import { useQuery } from '@apollo/client';
 const initialState={
   name:'',
   type:'',
-  quantity:0
+  quantity:undefined
 }
 
 export default function ProductComponent() {
   
   const [product, setProduct] = useState(initialState)
 
-  const [createProduct,{error}] = useMutation(CREATE_PRODUCT,{
+  const [createProduct,{error: createProductError}] = useMutation(CREATE_PRODUCT,{
     refetchQueries: [
       {query: QUERY_PRODUCTS}, 
       'getProducts' 
     ],
   })
-  const {data, loading }  = useQuery(QUERY_PRODUCTS)
+  const {data, loading:queryLoading, error:queryError }  = useQuery(QUERY_PRODUCTS)
 
-  
   const handleAddProduct = () =>{
                 try {
                   createProduct({
@@ -38,8 +37,8 @@ export default function ProductComponent() {
                   },
                 });
                 // refetch()
-            } catch (err) {
-              console.error(err);
+            } catch  {
+              console.error(createProductError);
             }
                 setProduct(initialState)
   }
@@ -93,9 +92,14 @@ export default function ProductComponent() {
         </div>
       </section>
     </div>
-      <ProductList 
-      products={data?.getProducts} 
-      />
+    
+    {
+      queryLoading?<div style={{textAlign:'center'}}>'Please wait... Loading'</div>:(queryError? <div style={{textAlign:'center'}}>Error with fetching dataS...</div>:(
+        <ProductList 
+          products={data?.getProducts} 
+        />
+      ))
+    }
     </>
   );
 }

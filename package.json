@@ -1,8 +1,9 @@
 {
   "name": "mern_store",
   "version": "1.0.0",
-  "description": "",
+  "description": "Example of full-stack development",
   "main": "server/server.js",
+  "homepage": "https://JonkHunkle.github.io/MERN_store",
   "dependencies": {
     "ansi-regex": "^5.0.1",
     "ansi-styles": "^4.3.0",
@@ -14,6 +15,7 @@
     "emoji-regex": "^8.0.0",
     "escalade": "^3.1.1",
     "get-caller-file": "^2.0.5",
+    "gh-pages": "^5.0.0",
     "has-flag": "^4.0.0",
     "is-fullwidth-code-point": "^3.0.0",
     "lodash": "^4.17.21",
@@ -39,7 +41,8 @@
     "dev": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cd client && npm run build"
+    "build": "cd client && npm run build",
+    "deploy": "gh-pages -d build"
   },
   "keywords": [],
   "author": "",
