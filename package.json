@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Example of full-stack development",
   "main": "server/server.js",
-  "homepage": "https://JonkHunkle.github.io/MERN_store",
+  "homepage": "https://jonkhunkle.github.io/MERN_store/",
   "dependencies": {
     "ansi-regex": "^5.0.1",
     "ansi-styles": "^4.3.0",
