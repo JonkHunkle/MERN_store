@@ -94,7 +94,7 @@ export default function ProductComponent() {
     </div>
     
     {
-      queryLoading?<div style={{textAlign:'center'}}>'Please wait... Loading'</div>:(queryError? <div style={{textAlign:'center'}}>Error with fetching dataS...</div>:(
+      queryLoading?<div style={{textAlign:'center'}}>'Please wait... Loading'</div>:(queryError? <div style={{textAlign:'center'}}>Error with fetching data...</div>:(
         <ProductList 
           products={data?.getProducts} 
         />
