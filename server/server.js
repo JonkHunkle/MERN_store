@@ -48,7 +48,9 @@ const server = new ApolloServer({
 await server.start()
 
 app.use('/graphql',
-  cors(),
+  cors({
+    origin:['http://localhost:3000/','https://antique-store-backend.onrender.com', ],
+  }),
   bodyParser.json(),
   expressMiddleware(server)
   )
