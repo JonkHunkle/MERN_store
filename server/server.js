@@ -61,15 +61,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
-if(process.env.NODE_ENV==='production'){
-  const __dirname = path.resolve(path.dirname(''))
-  app.use(express.static(path.join(__dirname, '../client/build')))
-}
+// if(process.env.NODE_ENV==='production'){
+//   const __dirname = path.resolve(path.dirname(''))
+//   app.use(express.static(path.join(__dirname, '../client/build')))
+// }
 
-app.get('*', (req, res)=>{
-  const __dirname = path.resolve(path.dirname(''))
-  res.sendFile(path.join(__dirname, '../client/build'))
-})
+// app.get('*', (req, res)=>{
+//   const __dirname = path.resolve(path.dirname(''))
+//   res.sendFile(path.join(__dirname, '../client/build'))
+// })
 
 db.once('open', () => {
 
