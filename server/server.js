@@ -68,7 +68,7 @@ if(process.env.NODE_ENV==='production'){
 
 app.get('*', (req, res)=>{
   const __dirname = path.resolve(path.dirname(''))
-  res.sendFile(path.join(__dirname, '../client/build/index.html'))
+  res.sendFile(path.join(__dirname, '../client/build'))
 })
 
 db.once('open', () => {
