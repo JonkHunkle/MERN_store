@@ -18,13 +18,20 @@ export default function ProductComponent() {
   
   const [product, setProduct] = useState(initialState)
 
-  const [createProduct,{error: createProductError}] = useMutation(CREATE_PRODUCT,{
-    refetchQueries: [
-      {query: QUERY_PRODUCTS}, 
-      'getProducts' 
-    ],
-  })
   const {data, loading:queryLoading, error:queryError }  = useQuery(QUERY_PRODUCTS)
+  const [createProduct,{error: createProductError}] = useMutation(CREATE_PRODUCT,{
+    update(cache, {data:{createProduct}}){
+      try{
+        const {getProducts} = cache.readQuery({query: QUERY_PRODUCTS})
+        cache.writeQuery({
+          query:QUERY_PRODUCTS,
+          data: {getProducts:  [...getProducts, createProduct ]}
+        })
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  })
 
   const handleAddProduct = () =>{
                 try {

@@ -3,19 +3,18 @@ import React from 'react';
 import ProductComponent from './components/ProductComponent';
 // Importing our theme provider which will make our global state available to child components
 import StoreProvider from './utils/StoreContext';
-
 import { getMainDefinition } from '@apollo/client/utilities';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 
 const httpLink = new HttpLink({
-  uri: 'https://antique-store-backend.onrender.com'
+  uri: 'https://antique-store-backend.onrender.com/'
 });
 
 
 
 const wsLink = new GraphQLWsLink(createClient({
-  url: 'wss://antique-store-backend.onrender.com'
+  uri: 'wss://antique-store-backend.onrender.com/'
 }));
 
 const splitLink = split(
@@ -32,7 +31,7 @@ const splitLink = split(
 
 
 const client = new ApolloClient({
-  link: splitLink,
+  link: httpLink,
   cache: new InMemoryCache(),
 });
 
@@ -43,7 +42,7 @@ export default function App() {
   return (
     <ApolloProvider client={client}> 
     <StoreProvider>
-      <ProductComponent />
+      <ProductComponent/>
     </StoreProvider>
     </ApolloProvider>
   );

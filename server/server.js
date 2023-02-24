@@ -6,6 +6,7 @@ import { ApolloServer} from '@apollo/server';
 import  typeDefs from './schemas/typeDefs.js';
 import resolvers  from './schemas/resolvers.js';
 import db from './config/connection.js';
+import path from 'path';
 
 import { createServer } from 'http';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
@@ -47,15 +48,21 @@ const server = new ApolloServer({
 
 await server.start()
 
+
+
 app.use('/graphql',
-  cors({
-    origin:['http://localhost:3000/','https://antique-store-backend.onrender.com', ],
-  }),
-  bodyParser.json(),
-  expressMiddleware(server)
-  )
+cors({
+  origin:'*',
+}),
+bodyParser.json(),
+expressMiddleware(server)
+)
+// app.use(express.urlencoded({ extended: true }));
+// app.use(express.json());
+  
 
 db.once('open', () => {
+
   httpServer.listen(PORT, () => {
     console.log(`API server running on port ${PORT}!`);
     console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
