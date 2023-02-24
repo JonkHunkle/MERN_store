@@ -50,7 +50,7 @@ await server.start()
 
 
 
-app.use('/graphql',
+app.use('https://antique-store-backend.onrender.com/graphql',
 cors({
   origin:'*',
 }),
