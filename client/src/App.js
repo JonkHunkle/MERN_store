@@ -11,8 +11,6 @@ const httpLink = new HttpLink({
   uri: '/'
 });
 
-
-
 const wsLink = new GraphQLWsLink(createClient({
   uri: '/'
 }));
