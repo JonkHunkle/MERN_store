@@ -50,16 +50,15 @@ await server.start()
 
 
 
-app.use('/graphql',
-cors({
-
-}),
+app.use(
+cors(),
 bodyParser.json(),
 expressMiddleware(server)
 )
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
+app.use((express.static(path.join(path.resolve(), '../client/build'))))
+// app.use(express.urlencoded({ extended: true }));
+// app.use(express.json());
+app.get('*', (req, res) =>res.sendFile(path.join(path.resolve(), '../client/build/index.html')))
 db.once('open', () => {
   httpServer.listen(PORT, () => {
     console.log(`API server running on port ${PORT}!`);
