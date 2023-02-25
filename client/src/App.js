@@ -7,8 +7,9 @@ import { getMainDefinition } from '@apollo/client/utilities';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 
-const httpLink =  '/graphql'
-
+const httpLink = new HttpLink({
+  uri: '/graphql'
+});
 
 
 
@@ -30,7 +31,7 @@ const splitLink = split(
 
 
 const client = new ApolloClient({
-  link: '/graphql',
+  link: splitLink,
   cache: new InMemoryCache(),
 });
 
