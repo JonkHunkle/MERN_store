@@ -8,13 +8,13 @@ import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 
 const httpLink = new HttpLink({
-  uri: '/graphql'
+  uri: '/'
 });
 
 
 
 const wsLink = new GraphQLWsLink(createClient({
-  uri: '/graphql'
+  uri: '/'
 }));
 
 const splitLink = split(
