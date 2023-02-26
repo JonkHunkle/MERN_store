@@ -24,7 +24,7 @@ const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 const wsServer = new WebSocketServer({
   server: httpServer,
-  path: '/graphql',
+  path: '/',
 });
 
 
