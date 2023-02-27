@@ -1,7 +1,6 @@
-import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import React from 'react';
 import ProductComponent from './components/ProductComponent';
-// Importing our theme provider which will make our global state available to child components
 import StoreProvider from './utils/StoreContext';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -10,7 +9,7 @@ import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 // import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 // import { createClient } from 'graphql-ws';
 
-const httpLink = new HttpLink({
+const httpLink = new createHttpLink({
   uri: '/graphql'
 });
 
@@ -30,23 +29,18 @@ const httpLink = new HttpLink({
 //   httpLink,
 // );
 
-
 const client = new ApolloClient({
   link: httpLink,
   cache: new InMemoryCache(),
 });
 
-console.log(client)
 export default function App() {
-  
-
   return (
     <ApolloProvider client={client}> 
     <StoreProvider>
       <Router>
         <Routes>
-
-        <Route exact path='/' element = {<ProductComponent/>} />
+          <Route exact path='/' element = {<ProductComponent/>} />
         </Routes>
       </Router>
     </StoreProvider>
