@@ -62,13 +62,13 @@ console.error('err: ',editError);
 }
   setSelectedProduct({})
 }
-
+console.log('selectedProduct: ',selectedProduct)
 
 // useEffect(()=>{subscribeToNewProducts()})
 
   return (
     <section className="product-list p-2" style={{display:'flex', flexDirection:'column', alignItems:'center' }}>
-        {products?.length>0&&products?.map((product) => (
+        {products.length>0&&products?.map((product) => (
           <div key={product._id} id={product._id} style={{textAlign:'center'}} className="card bg-light col-md-6 mb-3">
             {product._id===selectedProduct._id? (<> 
             <h4 className="card-header bg-primary text-light p-2 m-0">

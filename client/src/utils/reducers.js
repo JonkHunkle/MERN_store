@@ -1,7 +1,6 @@
 import { EDIT_PRODUCT, SET_PRODUCT } from '../utils/actions';
 
 
-// Notice we moved the initial state object from our ProductComponent to the reducer itself
 const initialState = {
   product: {
     name:'',
@@ -11,7 +10,6 @@ const initialState = {
   }
 }
 
-// Here we pass a default value of initialState if none is provided
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_PRODUCT: {
