@@ -34,7 +34,7 @@ const toggleEdit = (e, product)=>{
 
 const handleDeleteProduct = (e)=>{
   e.preventDefault()
-  console.log(e.target.id)
+  (e.target.id)
   try {
     deleteProduct({
       variables:{
@@ -62,7 +62,6 @@ console.error('err: ',editError);
 }
   setSelectedProduct({})
 }
-console.log('selectedProduct: ',selectedProduct)
 
 // useEffect(()=>{subscribeToNewProducts()})
 

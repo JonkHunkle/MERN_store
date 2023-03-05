@@ -20,9 +20,7 @@ export default function reducer(state = initialState, action) {
       
     }
     case EDIT_PRODUCT: {
-      console.log(action)
       const {prop, value} = action.variables
-      console.log(state.product.name)
       return {...state.product[prop]=value} 
     }
     default: {
