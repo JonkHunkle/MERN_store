@@ -33,9 +33,6 @@ const wsServer = new WebSocketServer({
   path: '/graphql',
 });
 
-console.log(wsServer)
-console.log(httpServer)
-console.log(app)
 const serverCleanup = useServer({ schema }, wsServer);
 
 const server = new ApolloServer({
