@@ -10,7 +10,7 @@ import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 // import { createClient } from 'graphql-ws';
 
 const httpLink = new createHttpLink({
-  uri: '/graphql'
+  uri: 'https://antique-store-backend.onrender.com/'
 });
 
 // const wsLink = new GraphQLWsLink(createClient({
