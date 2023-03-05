@@ -12,7 +12,7 @@ const httpLink = new createHttpLink({
   uri: 'https://antique-store-backend.onrender.com'
 });
 const wsLink = new GraphQLWsLink(createClient({
-  url: 'wss://antique-store-backend.onrender.com'
+  url: 'wss://antique-store-backend.onrender.com/graphql'
 }));
 
 const splitLink = split(
