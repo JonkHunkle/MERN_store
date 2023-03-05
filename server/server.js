@@ -27,7 +27,7 @@ const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 const wsServer = new WebSocketServer({
   server: httpServer,
-  path: '/graphql',
+  path: '/',
 });
 
 
@@ -57,9 +57,9 @@ cors(),
 bodyParser.json(),
 expressMiddleware(server)
 )
-if (process.env.NODE_ENV === 'production'){
-  app.use((express.static(path.join(__dirname, '../client/build'))))
-}
+// if (process.env.NODE_ENV === 'production'){
+//   app.use((express.static(path.join(__dirname, '../client/build'))))
+// }
 
 db.once('open', () => {
   httpServer.listen(PORT, () => {
