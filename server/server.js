@@ -15,6 +15,9 @@ import { useServer } from 'graphql-ws/lib/use/ws';
 import { fileURLToPath } from 'url';
 import path from 'path';
 
+
+
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PORT = process.env.PORT || 3001;
@@ -30,7 +33,9 @@ const wsServer = new WebSocketServer({
   path: '/graphql',
 });
 
-
+console.log(wsServer)
+console.log(httpServer)
+console.log(app)
 const serverCleanup = useServer({ schema }, wsServer);
 
 const server = new ApolloServer({
@@ -62,7 +67,7 @@ expressMiddleware(server)
 // }
 
 db.once('open', () => {
-  app.listen(PORT, () => {
+  wsServer.listen(PORT, () => {
     console.log(`API server running on port ${PORT}!`);
     console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
   });
