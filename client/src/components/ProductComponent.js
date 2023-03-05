@@ -1,8 +1,8 @@
 import React, { useState} from 'react';
-import {useMutation} from '@apollo/client'
+import {useMutation, useSubscription} from '@apollo/client'
 import { CREATE_PRODUCT } from '../utils/mutations';
 import ProductList from './ProductList'
-import { QUERY_PRODUCTS } from '../utils/queries';
+import { QUERY_PRODUCTS,PRODUCTS_SUBSCRIPTION } from '../utils/queries';
 import { useQuery } from '@apollo/client';
 
 
@@ -19,19 +19,23 @@ export default function ProductComponent() {
   const [product, setProduct] = useState(initialState)
 
   const {data, loading:queryLoading, error:queryError }  = useQuery(QUERY_PRODUCTS)
-  const [createProduct,{error: createProductError}] = useMutation(CREATE_PRODUCT,{
-    update(cache, {data:{createProduct}}){
-      try{
-        const {getProducts} = cache.readQuery({query: QUERY_PRODUCTS})
-        cache.writeQuery({
-          query:QUERY_PRODUCTS,
-          data: {getProducts:  [...getProducts, createProduct ]}
+  const [createProduct,{error: createProductError}] = useMutation(CREATE_PRODUCT)
+
+  useSubscription(
+    PRODUCTS_SUBSCRIPTION,
+    {
+      onSubscriptionData:({client ,subscriptionData})=>{
+        const cachedData= client.readQuery({
+          query:QUERY_PRODUCTS
         })
-      } catch (err) {
-        console.log(err)
+        client.writeQuery({
+          query:QUERY_PRODUCTS,
+          data: {getProducts:  [...cachedData.getProducts, subscriptionData.data.productAdded ]}
+    //     })
+        })
       }
     }
-  })
+  )
 
   const handleAddProduct = () =>{
                 try {
