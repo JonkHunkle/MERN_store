@@ -64,7 +64,7 @@ expressMiddleware(server)
 // }
 
 db.once('open', () => {
-  wsServer.listen(PORT, () => {
+  httpServer.listen(PORT, () => {
     console.log(`API server running on port ${PORT}!`);
     console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
   });
