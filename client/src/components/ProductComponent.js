@@ -1,25 +1,15 @@
-import React, { useState} from 'react';
-import {useMutation, useSubscription} from '@apollo/client'
-import { CREATE_PRODUCT } from '../utils/mutations';
+import React, {useState} from 'react';
+import {useSubscription} from '@apollo/client'
 import ProductList from './ProductList'
+import AddProduct from './AddProduct'
 import { QUERY_PRODUCTS,PRODUCTS_SUBSCRIPTION } from '../utils/queries';
 import { useQuery } from '@apollo/client';
 
-
-
-
-const initialState={
-  name:'',
-  type:'',
-  quantity:undefined
-}
-
 export default function ProductComponent() {
-  
-  const [product, setProduct] = useState(initialState)
 
   const {data, loading:queryLoading, error:queryError }  = useQuery(QUERY_PRODUCTS)
-  const [createProduct,{error: createProductError}] = useMutation(CREATE_PRODUCT)
+
+  const [displayModal, setDisplayModal] = useState(false)
 
   useSubscription(
     PRODUCTS_SUBSCRIPTION,
@@ -37,73 +27,30 @@ export default function ProductComponent() {
     }
   )
 
-  const handleAddProduct = () =>{
-                try {
-                  createProduct({
-                    variables:{productInput:{ 
-                      name:product.name.toString(),
-                      type:product.type.toString(),
-                      quantity:Number(product.quantity),
-                    }
-                  },
-                });
-                // refetch()
-            } catch  {
-              console.error(createProductError);
-            }
-                setProduct(initialState)
-  }
-
-  const handleChange = (e) =>{
-    e.preventDefault()
-    const {name:prop, value} = e.target
-    setProduct({...product, [prop]:value})
-  }
-
-
-
   return (
     <>
-    <div style={{background:'	#90a7d5', textAlign:'center'}} className='p-2'> 
+    <div style={{background:'	#90a7d5', textAlign:'center', display:'flex', flexDirection:'column'}} className='p-2'> 
       <h1>Digital Store Inventory</h1>
-      <section className="product-input" >
-        <div>
-          <div className="add-product py-2">
-            Add a Product:
-            <input
-              className='mx-2'
-              name='name'
-              value={product.name}
-              onChange={(e) => handleChange(e)}
-              placeholder="New Product name..."
-              type="text"
-            />
-            <input
-              className='mx-2'
-              name='type'
-              value={product.type}
-              onChange={(e) => handleChange(e)}
-              placeholder="New Product type..."
-              type="text"
-            />
-            <input
-              className='mx-2'
-              name='quantity'
-              value={product?.quantity??''}
-              onChange={(e) => handleChange(e)}
-              placeholder="New Product quantity..."
-              type="number"
-            />
-            <button
-              onClick={() =>handleAddProduct() }
+      <section className="product-input">
+        <AddProduct/>
+      </section>
+      <button
+        className='add-product-btn'
+        style={{display:'none',width:'auto', placeSelf:'center'}}
+        onClick={()=>setDisplayModal(!displayModal)}
+      >Add New Product</button>
+    </div>
+    { displayModal && <div className="modal">
+          <div className="modal-content"
             >
-              Add Product
-            </button>
+              <span className="close" onClick={()=>setDisplayModal(!displayModal)} >
+              &times;
+            </span>
+            <h2>Add New Product</h2>
+            <AddProduct setDisplayModal={setDisplayModal}/>
           </div>
         </div>
-      </section>
-    </div>
-    
+}
     {
       queryLoading?<div style={{textAlign:'center'}}>'Please wait... Loading'</div>:(queryError? <div style={{textAlign:'center'}}>Error with fetching data...</div>:(
         <ProductList 
