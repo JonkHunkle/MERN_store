@@ -70,6 +70,7 @@ export default function AddProduct({setDisplayModal}) {
               type="number"
             />
             <button className='add-product-btn'
+            style={{margin:'1rem 0'}}
               onClick={() =>handleAddProduct() }
             >
               Add Product

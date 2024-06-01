@@ -14,7 +14,7 @@ export default function ProductList({products}) {
   const [deleteProduct, { error: deleteError }]= useMutation(DELETE_PRODUCT,{
     refetchQueries: [
       {query: QUERY_PRODUCTS}, 
-      'getProducts' 
+      'products' 
     ],
   })
 
@@ -37,9 +37,6 @@ console.error('err: ', deleteError);
 }
 
 }
-
-
-
 
   return (
     <section className="product-list p-2" style={{display:'flex', flexDirection:'column', alignItems:'center' }}>

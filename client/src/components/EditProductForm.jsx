@@ -9,7 +9,7 @@ export default function EditProductForm({selectedProduct, setSelectedProduct}) {
     const [editProduct, { error:editError }]= useMutation(EDIT_PRODUCT,{
         refetchQueries: [
             {query: QUERY_PRODUCTS}, 
-            'getProducts' 
+            'products' 
         ],
         })
 
