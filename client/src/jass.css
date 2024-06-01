@@ -1400,7 +1400,7 @@
   /* col-sm */
   @media screen and (min-width: 647px) {
     .modal{
-      display: none;
+      /* display: none; */
     }
     .col-sm-auto {
       flex-grow: 1;

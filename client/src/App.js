@@ -9,10 +9,10 @@ import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 
 const httpLink = new createHttpLink({
-  uri: 'https://antique-store-backend.onrender.com/graphql'
+  uri: 'http://localhost:5001/graphql'
 });
 const wsLink = new GraphQLWsLink(createClient({
-  url: 'wss://antique-store-backend.onrender.com/graphql'
+  url: 'ws://localhost:5001/graphql'
 }));
 
 const splitLink = split(
